@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.llm_cache/
+output/*
+!output/README.md
+!output/.gitkeep
+web/_uploads/
+web/_runs/
+data_profiles/
+history/*.db
+*.db
+
+# local runtime / venv
+runtime/
+.venv/
+.env

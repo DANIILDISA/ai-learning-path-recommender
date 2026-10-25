@@ -1,0 +1,26 @@
+name: case-3
+
+x-common: &common
+  restart: unless-stopped
+  networks: [proxy_network]
+  logging:
+    driver: json-file
+    options:
+      max-size: "10m"
+      max-file: "3"
+
+services:
+  produkt3:
+    <<: *common
+    build: .
+    container_name: produkt3
+    env_file: ./.env
+    environment:
+      MODEL_GROUP: russian
+    volumes:
+      - ./output:/app/output
+
+networks:
+  proxy_network:
+    external: true
+

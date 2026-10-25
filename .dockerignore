@@ -1,0 +1,17 @@
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+runtime/
+**/__pycache__/
+*.pyc
+.pytest_cache/
+web/frontend/node_modules/
+output/
+Требования/
+tests/
+START.bat
+Dockerfile
+.dockerignore
+.git/

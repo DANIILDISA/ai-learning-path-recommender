@@ -1,0 +1,1098 @@
+/* Повторяющиеся элементы: кнопка, чип, бейдж, карточка, баннер, скелетон.
+ * Значения -- из токенов; ни одного цвета или радиуса по месту. */
+
+/* --- Кнопки ------------------------------------------------------------ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 34px;
+  padding: 0 18px;
+  font-size: var(--fs-base);
+  font-weight: 600;
+  border-radius: var(--radius-btn);
+  border: 1px solid transparent;
+  transition: background-color .12s, box-shadow .12s, border-color .12s;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--accent-dark);
+}
+
+.btn-primary:active {
+  background: var(--accent-dark);
+  box-shadow: none;
+}
+
+.btn-secondary {
+  background: var(--surface);
+  color: var(--accent);
+  border-color: var(--line-btn);
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink-muted);
+  font-weight: 500;
+}
+
+.btn-ghost:hover {
+  color: var(--accent);
+}
+
+.btn-lg {
+  height: 48px;
+  padding: 0 28px;
+}
+
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  background: var(--tint);
+  color: var(--ink-muted);
+  border-color: transparent;
+  cursor: not-allowed;
+}
+
+/* --- Чипы и бейджи ----------------------------------------------------- */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 10px;
+  font-size: var(--fs-chip);
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--tint);
+  border-radius: var(--radius-chip);
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 10px;
+  font-size: var(--fs-chip);
+  font-weight: 600;
+  border-radius: var(--radius-chip);
+}
+
+.badge-accent {
+  color: var(--accent);
+  background: var(--tint-panel);
+}
+
+.badge-ok {
+  color: var(--ok-ink);
+  background: var(--ok-bg);
+}
+
+/* --- Карточка рекомендации --------------------------------------------- */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  min-height: var(--card-h);
+  padding: 20px 22px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  transition: box-shadow .14s, border-color .14s;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-card-hover);
+  border-color: var(--line-panel);
+}
+
+/* Названия в реестре бывают до 150 символов («Системный анализ данных:
+ * смыслоориентирование и структурирование данных, формулировка и проверка
+ * гипотез, ...»). Без ограничения такой заголовок съедает всю карточку и
+ * выдавливает из неё то, ради чего она нужна. Полный текст никуда не
+ * пропадает: он в атрибуте title и в карточке курса. */
+.card-title {
+  font-size: var(--fs-card);
+  line-height: 1.25;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-annotation {
+  font-size: var(--fs-base);
+  line-height: 1.45;
+  color: var(--ink-muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  font-size: var(--fs-meta);
+  font-weight: 500;
+  color: var(--ink-meta);
+}
+
+.meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.card-foot {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  margin-top: auto;
+  padding-top: 4px;
+}
+
+.card-foot .btn {
+  margin-left: auto;
+}
+
+/* Метка электронного курса: его можно начать сразу, и это сказано в самом
+   верху карточки, где у ППК стоит просто «ППК». */
+.chip-ek {
+  gap: 6px;
+  color: var(--ok-ink);
+  background: var(--ok-bg);
+  white-space: nowrap;
+}
+
+.chip-ek .icon {
+  width: 14px;
+  height: 14px;
+}
+
+/* --- «Почему рекомендовано» -- одно предложение, всегда на виду ---------- */
+
+.card-reason {
+  width: 100%;
+  padding-left: 12px;
+  border-left: 3px solid var(--line-panel);
+}
+
+.card-reason-label {
+  display: block;
+  margin-bottom: 2px;
+  font-size: var(--fs-chip);
+  font-weight: 600;
+  color: var(--ink-muted);
+}
+
+.card-reason-text {
+  font-size: var(--fs-meta);
+  line-height: 1.45;
+  color: var(--ink-meta);
+}
+
+/* --- Место в сетке: карточка уходит, следующая встаёт на её место --------- */
+
+.slot {
+  display: flex;
+  min-width: 0;
+}
+
+.slot > .card {
+  flex: 1;
+  min-width: 0;
+}
+
+.card.is-leaving {
+  opacity: 0;
+  transform: scale(.97);
+  pointer-events: none;
+  transition: opacity .15s ease, transform .15s ease;
+}
+
+.card.is-entering {
+  animation: card-in .28s ease both;
+}
+
+@keyframes card-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card.is-leaving { transition: none; }
+  .card.is-entering { animation: none; }
+}
+
+/* --- Три действия ------------------------------------------------------ */
+
+.actions {
+  display: flex;
+  gap: 6px;
+  width: 100%;
+  padding-top: 12px;
+  border-top: 1px solid var(--line-soft);
+}
+
+/* Три кнопки всегда в одну строку на всю ширину карточки: перенос третьей
+   на второй ряд делал карточки в одном ряду разной высоты. */
+.action {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 30px;
+  padding: 0 8px;
+  font-size: var(--fs-meta);
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--ink-meta);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-chip);
+}
+
+.action:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.action:disabled {
+  color: var(--decor);
+  background: var(--tint);
+  border-color: transparent;
+  cursor: not-allowed;
+}
+
+.actions .action-error {
+  flex: 0 0 100%;
+}
+
+.action-error {
+  font-size: var(--fs-meta);
+  color: #b3261e;
+}
+
+/* --- Баннер ------------------------------------------------------------ */
+
+.banner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 18px 24px;
+  background: var(--tint-panel);
+  border: 1px solid var(--line-panel);
+  border-radius: var(--radius-card);
+}
+
+.banner-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  background: var(--surface);
+  color: var(--accent);
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+
+.banner-body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.banner-title {
+  font-size: var(--fs-card);
+}
+
+.banner-text {
+  margin-top: 6px;
+  max-width: 800px;
+  font-size: var(--fs-base);
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+.banner-note {
+  margin-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-chip);
+  font-weight: 500;
+  color: var(--ink-muted);
+}
+
+.banner-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: none;
+}
+
+/* --- Полоса «Как работает подбор» -------------------------------------- */
+
+.how {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 22px 28px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+.how:target,
+.how.is-highlighted {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.how-title {
+  font-size: var(--fs-card);
+  flex: none;
+  margin-right: 4px;
+  white-space: nowrap;
+}
+
+.how-step {
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  align-items: center;
+  gap: 12px;
+}
+
+.how-step-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  background: var(--tint-icon);
+  color: var(--accent);
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+
+.how-step-name {
+  font-size: var(--fs-sub);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.how-step-text {
+  margin-top: 2px;
+  font-size: var(--fs-meta);
+  color: var(--ink-muted);
+}
+
+.how-arrow {
+  color: var(--decor);
+  flex: none;
+}
+
+.how-arrow .icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* --- Прочее ------------------------------------------------------------ */
+
+.section {
+  margin-top: 32px;
+}
+
+.skeleton {
+  display: block;
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--tint) 25%, var(--track-bg) 50%, var(--tint) 75%);
+  background-size: 300% 100%;
+  animation: skeleton 1.2s ease-in-out infinite;
+}
+
+@keyframes skeleton {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+.skeleton-chip { width: 84px; height: 28px; border-radius: var(--radius-chip); }
+.skeleton-title { width: 78%; height: 24px; }
+.skeleton-line { width: 100%; height: 14px; }
+.skeleton-line.short { width: 60%; }
+
+/* Кто пользуется настройкой «уменьшить движение», не должен видеть мерцание. */
+@media (prefers-reduced-motion: reduce) {
+  .skeleton { animation: none; }
+  .btn, .card { transition: none; }
+}
+
+.error-box {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+}
+
+.error-text {
+  font-size: var(--fs-base);
+  color: var(--ink);
+}
+
+/* --- Мастер настройки -------------------------------------------------- */
+
+.wizard-card {
+  max-width: var(--wizard-w);
+  margin: 24px auto 0;
+  padding: 32px 36px 28px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-panel);
+}
+
+.wizard-card.is-loading {
+  min-height: 420px;
+}
+
+.wizard-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.wizard-head-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  background: var(--tint-icon);
+  color: var(--accent);
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+
+.wizard-head-title {
+  font-size: var(--fs-lead);
+  font-weight: 600;
+}
+
+.wizard-step {
+  margin-left: auto;
+  font-size: var(--fs-base);
+  font-weight: 600;
+  color: var(--ink-muted);
+}
+
+.progress {
+  height: 8px;
+  border-radius: var(--radius-bar);
+  background: var(--track-bg);
+  overflow: hidden;
+}
+
+.progress-fill {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-bar);
+  background: var(--accent);
+  transition: width .2s ease;
+}
+
+.wizard-question {
+  margin: 30px 0 22px;
+}
+
+.wizard-title {
+  font-size: var(--fs-question);
+  line-height: 1.25;
+  max-width: 860px;
+}
+
+.wizard-hint {
+  margin-top: 12px;
+  max-width: 860px;
+  font-size: var(--fs-base);
+  line-height: 1.5;
+  color: var(--ink-muted);
+}
+
+/* --- Плитки выбора ----------------------------------------------------- */
+
+.tiles {
+  display: grid;
+  gap: 20px;
+}
+
+.tiles-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.tiles-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+.tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: var(--tile-h);
+  padding: 18px 44px 18px 20px;
+  text-align: left;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-tile);
+  transition: border-color .12s, background-color .12s, box-shadow .12s;
+}
+
+.tile:hover:not(.is-disabled) {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-card);
+}
+
+.tile.is-checked {
+  background: var(--tint-panel);
+  border-color: var(--accent);
+}
+
+/* Гасим, а не прячем: человек должен видеть, что вариант существует, но
+   выбрать его сейчас нельзя, потому что уже выбрано три. */
+.tile.is-disabled {
+  background: var(--tint);
+  border-color: var(--line);
+  color: var(--ink-muted);
+  cursor: not-allowed;
+}
+
+.tile-check {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #fff;
+  display: grid;
+  place-items: center;
+}
+
+.tile-check .icon {
+  width: 12px;
+  height: 12px;
+  stroke-width: 3;
+}
+
+.tile-title {
+  font-size: var(--fs-lead);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.tile-desc {
+  font-size: var(--fs-base);
+  line-height: 1.45;
+  color: var(--ink-muted);
+}
+
+.tile-meta {
+  margin-top: auto;
+  padding-top: 8px;
+  font-size: var(--fs-meta);
+  color: var(--ink-muted);
+}
+
+.tile.is-disabled .tile-title,
+.tile.is-disabled .tile-desc {
+  color: var(--ink-muted);
+}
+
+/* --- Признаки допуска -------------------------------------------------- */
+
+.attr-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.attr-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 16px 20px;
+  text-align: left;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-tile);
+}
+
+.attr-item:hover {
+  border-color: var(--accent);
+}
+
+.attr-item.is-checked {
+  background: var(--tint-panel);
+  border-color: var(--accent);
+}
+
+.attr-box {
+  width: 22px;
+  height: 22px;
+  flex: none;
+  border-radius: 6px;
+  border: 1px solid var(--line-btn);
+  background: var(--surface);
+  display: grid;
+  place-items: center;
+  color: #fff;
+}
+
+.attr-item.is-checked .attr-box {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.attr-box .icon {
+  width: 14px;
+  height: 14px;
+  stroke-width: 3;
+}
+
+.attr-title {
+  font-size: var(--fs-base);
+  line-height: 1.4;
+}
+
+.wizard-count,
+.wizard-note {
+  margin-top: 16px;
+  font-size: var(--fs-meta);
+  color: var(--ink-muted);
+}
+
+.wizard-note {
+  max-width: 860px;
+  line-height: 1.5;
+}
+
+.wizard-divider {
+  height: 1px;
+  margin: 22px 0 18px;
+  background: var(--line-soft);
+}
+
+.wizard-foot {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.wizard-foot .wizard-next {
+  margin-left: auto;
+}
+
+.btn-wizard {
+  height: 42px;
+  padding: 0 22px;
+}
+
+/* --- «Рекомендации обновлены» ------------------------------------------ */
+
+.done {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  max-width: 830px;
+  margin: 40px auto 0;
+  padding: 48px 40px;
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-panel);
+}
+
+.done-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 32px;
+  background: var(--tint-icon);
+  color: var(--accent);
+  display: grid;
+  place-items: center;
+}
+
+.done-icon .icon {
+  width: 30px;
+  height: 30px;
+  stroke-width: 2.4;
+}
+
+.done-title {
+  font-size: var(--fs-panel);
+}
+
+.done-text {
+  max-width: 560px;
+  font-size: var(--fs-base);
+  line-height: 1.5;
+  color: var(--ink-muted);
+}
+
+.done-summary {
+  width: 100%;
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  text-align: left;
+}
+
+.done-row {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+}
+
+.done-label {
+  flex: none;
+  min-width: 160px;
+  font-size: var(--fs-meta);
+  color: var(--ink-muted);
+}
+
+.done-actions {
+  display: flex;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+/* --- Панель курса ------------------------------------------------------ */
+
+.drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(16, 33, 63, .35);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .16s;
+  z-index: 20;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(560px, 92vw);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  box-shadow: -12px 0 32px rgba(80, 98, 127, .18);
+  transform: translateX(100%);
+  transition: transform .18s ease;
+  z-index: 21;
+}
+
+.drawer-open .drawer-backdrop {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.drawer-open .drawer {
+  transform: none;
+}
+
+.drawer-head {
+  display: flex;
+  justify-content: flex-end;
+  padding: 12px 16px 0;
+}
+
+.drawer-close {
+  width: 36px;
+  height: 36px;
+  font-size: 24px;
+  line-height: 1;
+  color: var(--ink-muted);
+  background: transparent;
+  border: none;
+  border-radius: 18px;
+}
+
+.drawer-close:hover {
+  background: var(--tint);
+  color: var(--ink);
+}
+
+.drawer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 4px 32px 24px;
+}
+
+.drawer-title {
+  font-size: var(--fs-panel);
+  line-height: 1.25;
+}
+
+.drawer-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 14px;
+  font-size: var(--fs-meta);
+  color: var(--ink-meta);
+}
+
+.drawer-step {
+  margin-top: 12px;
+  font-size: var(--fs-meta);
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.drawer-section {
+  margin-top: 26px;
+}
+
+.drawer-section-title {
+  font-size: var(--fs-sub);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.drawer-text {
+  font-size: var(--fs-base);
+  line-height: 1.55;
+  color: var(--ink-meta);
+}
+
+.drawer-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: var(--fs-base);
+  line-height: 1.5;
+  color: var(--ink-meta);
+}
+
+.drawer-list li {
+  position: relative;
+  padding-left: 16px;
+}
+
+.drawer-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .6em;
+  width: 6px;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--accent);
+}
+
+.drawer-note {
+  padding: 14px 16px;
+  font-size: var(--fs-meta);
+  line-height: 1.5;
+  color: var(--ink-muted);
+  background: var(--tint);
+  border-radius: var(--radius-tile);
+}
+
+.drawer-loading {
+  padding: 32px;
+  color: var(--ink-muted);
+}
+
+.drawer-foot {
+  padding: 18px 32px 24px;
+  border-top: 1px solid var(--line-soft);
+}
+
+.drawer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.drawer-actions .is-chosen {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer,
+  .drawer-backdrop {
+    transition: none;
+  }
+}
+
+.ai-note {
+  margin: 0 0 12px;
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+}
+
+/* --- Недельный запас отметок -------------------------------------------- */
+
+.quota {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: -14px 0 22px;
+  font-size: var(--fs-meta);
+  color: var(--ink-muted);
+}
+
+.quota-dots {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.quota-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  border: 1.5px solid var(--decor);
+}
+
+.quota-dot.is-left {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+/* Запас кончился: не отказ, а ожидание. Спокойная плашка с точным сроком. */
+.quota.is-empty {
+  align-items: flex-start;
+  padding: 12px 16px;
+  font-size: var(--fs-base);
+  line-height: 1.45;
+  color: var(--ink-soft);
+  background: var(--tint-panel);
+  border: 1px solid var(--line-panel);
+  border-radius: var(--radius-tile);
+}
+
+.quota.is-empty .icon {
+  margin-top: 2px;
+  color: var(--accent);
+}
+
+.drawer-foot .quota {
+  margin: 0 0 12px;
+}
+
+.drawer-foot .quota.is-empty {
+  padding: 10px 12px;
+  font-size: var(--fs-meta);
+}
+
+/* --- Подтверждение отметки ---------------------------------------------- */
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  z-index: 30;
+  max-width: min(560px, calc(100vw - 32px));
+  padding: 12px 18px;
+  font-size: var(--fs-base);
+  line-height: 1.4;
+  color: #fff;
+  background: var(--ink);
+  border-radius: var(--radius-tile);
+  box-shadow: var(--shadow-card-hover);
+  opacity: 0;
+  transform: translate(-50%, 12px);
+  pointer-events: none;
+  transition: opacity .18s, transform .18s;
+}
+
+.toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast { transition: none; }
+}
+
+/* --- Подборка разобрана -------------------------------------------------- */
+
+.empty-state.is-compact {
+  margin: 0 auto;
+  padding: 32px 28px;
+}
+
+.empty-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.section-head-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+/* --- Служебная кнопка для тестов (самый низ экрана «Данные») -------------- */
+
+.test-footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 72px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line-soft);
+}
+
+.test-reset {
+  padding: 2px 0;
+  font-size: 11px;
+  color: var(--decor);
+  background: none;
+  border: 0;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+}
+
+.test-reset:hover:not(:disabled) {
+  color: var(--ink-muted);
+  text-decoration-color: currentColor;
+}
+
+.test-reset-status {
+  font-size: 11px;
+  color: var(--ink-muted);
+}

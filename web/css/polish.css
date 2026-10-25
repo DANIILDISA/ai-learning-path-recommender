@@ -1,0 +1,538 @@
+/* Дополнения после юзабилити-прогона: служебное меню, экран «Данные» в общем
+ * стиле, заметные отметки на карточках и вёрстка под узкий экран.
+ * Подключается последним, поэтому правила здесь переопределяют остальные. */
+
+/* --- Общее ------------------------------------------------------------- */
+
+/* Контейнер одной отрисовки экрана (см. main.js). Для вёрстки он прозрачен. */
+.screen-host {
+  display: contents;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.loading-note {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 24px var(--gutter) 0;
+  color: var(--ink-muted);
+}
+
+.page .loading-note {
+  padding: 0 0 16px;
+}
+
+.section-foot {
+  margin-top: 16px;
+}
+
+/* --- Служебное меню «Для методиста» ------------------------------------ */
+
+.service-menu {
+  position: relative;
+  flex: none;
+  margin-left: 4px;
+}
+
+.service-summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 6px 10px;
+  font-size: var(--fs-meta);
+  color: var(--ink-muted);
+  border-radius: var(--radius-chip);
+}
+
+.service-summary::-webkit-details-marker {
+  display: none;
+}
+
+.service-summary::after {
+  content: " ▾";
+}
+
+.service-summary:hover,
+.service-menu.is-active .service-summary {
+  color: var(--accent);
+  background: var(--tint);
+}
+
+.service-pop {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  width: 280px;
+  padding: 8px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-tile);
+  box-shadow: var(--shadow-card-hover);
+  z-index: 15;
+}
+
+.service-link {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px;
+  border-radius: var(--radius-chip);
+  text-decoration: none;
+}
+
+.service-link:hover {
+  background: var(--tint);
+  text-decoration: none;
+}
+
+.service-link-title {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.service-link-text {
+  font-size: var(--fs-meta);
+  color: var(--ink-muted);
+}
+
+.service-tag {
+  display: inline-block;
+  margin-bottom: 8px;
+  padding: 3px 10px;
+  font-size: var(--fs-chip);
+  font-weight: 600;
+  color: var(--ink-muted);
+  background: var(--tint);
+  border-radius: var(--radius-chip);
+}
+
+/* --- Экран «Данные»: тот же язык, что у остальных экранов -------------- */
+
+.page-service .section {
+  margin-bottom: 40px;
+}
+
+.page-service .data-drop {
+  align-items: center;
+  justify-items: center;
+}
+
+.page-service .data-drop-btn {
+  margin-top: 6px;
+  pointer-events: none;
+}
+
+.data-drop:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--tint-icon);
+}
+
+.data-table-wrap {
+  overflow-x: auto;
+}
+
+.data-hint {
+  margin: 8px 0;
+  font-size: var(--fs-meta);
+  color: var(--ink-muted);
+}
+
+.data-subtitle {
+  margin: 20px 0 8px;
+  font-size: var(--fs-lead);
+}
+
+.data-details {
+  margin: 8px 0;
+}
+
+.data-details summary {
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.data-details ul {
+  margin: 8px 0 0;
+  padding-left: 20px;
+  color: var(--ink-meta);
+  line-height: 1.5;
+}
+
+.data-change {
+  margin: 16px 0;
+  padding: 16px 20px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+.data-change > * + * {
+  margin-top: 10px;
+}
+
+.data-change .data-subtitle {
+  margin-top: 0;
+}
+
+.data-confirm {
+  margin: 12px 0;
+  padding: 16px 20px;
+  background: var(--warn-bg);
+  color: var(--warn-ink);
+  border-radius: var(--radius-card);
+}
+
+.data-confirm p {
+  margin-top: 6px;
+}
+
+.data-confirm .data-actions {
+  margin-top: 12px;
+}
+
+.data-select {
+  max-width: 100%;
+}
+
+.drawer[hidden] {
+  display: none;
+}
+
+.drawer-alert {
+  margin-bottom: 16px;
+  padding: 14px 16px;
+  background: var(--warn-bg);
+  color: var(--warn-ink);
+  border-radius: var(--radius-tile);
+}
+
+.drawer-alert p {
+  margin-top: 6px;
+}
+
+/* --- Траектория -------------------------------------------------------- */
+
+.progress-rest {
+  margin-top: 12px;
+}
+
+.progress-rest summary {
+  cursor: pointer;
+  font-size: var(--fs-meta);
+  color: var(--accent);
+}
+
+.why-panel-list li.is-off {
+  color: var(--ink-muted);
+}
+
+.why-panel-list li a {
+  margin-left: 6px;
+  white-space: nowrap;
+}
+
+.picker-more {
+  margin-top: 16px;
+}
+
+.picker-iogv {
+  width: 100%;
+  margin-top: 8px;
+}
+
+/* --- Узкий экран ------------------------------------------------------- */
+
+@media (max-width: 900px) {
+  :root {
+    --gutter: 24px;
+    --header-h: 96px;
+  }
+
+  /* Планшет: шапка в две строки (логотип и «кто вошёл», ниже меню), иначе
+     «Сменить профиль» и «Для методиста» уезжают за край окна. */
+  .header {
+    height: auto;
+    min-height: 56px;
+  }
+
+  .header-inner {
+    flex-wrap: wrap;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    gap: 8px 16px;
+  }
+
+  .who {
+    margin-left: auto;
+    min-width: 0;
+  }
+
+  .nav {
+    order: 5;
+    flex: 1 0 100%;
+    gap: 24px;
+    margin-left: 0;
+    height: 44px;
+  }
+
+  /* Три шага «Как работает подбор» не помещаются в строку: столбиком. */
+  .how {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .how-arrow {
+    display: none;
+  }
+
+  /* Ближайшие шаги -- два на два: в четыре в ряд бейдж и название не помещаются. */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .step-arrow {
+    display: none;
+  }
+
+  .track-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .card-grid,
+  .cat-grid,
+  .known-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  :root {
+    --gutter: 16px;
+    --header-h: 96px;
+    --grid-gap: 16px;
+    --fs-page: 28px;
+    --fs-panel: 20px;
+    --fs-card: 18px;
+  }
+
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  /* Шапка в две строки: логотип и «кто вошёл», ниже прокручиваемое меню. */
+  .header {
+    height: auto;
+    min-height: 56px;
+  }
+
+  .track-side {
+    position: static;
+  }
+
+  .header-inner {
+    flex-wrap: wrap;
+    padding: 8px 16px;
+    gap: 8px 12px;
+  }
+
+  .brand-logo {
+    height: 40px;
+  }
+
+  .who {
+    margin-left: auto;
+    min-width: 0;
+  }
+
+  .who-position {
+    max-width: 150px;
+  }
+
+  .who-avatar {
+    display: none;
+  }
+
+  .nav {
+    order: 5;
+    flex: 1 0 100%;
+    gap: 4px;
+    margin-left: 0;
+    height: 48px;
+  }
+
+  /* Четыре пункта делят строку поровну; длинное название переносится,
+   * а не уезжает за край экрана. */
+  .nav-item {
+    flex: 1 1 0;
+    min-width: 0;
+    justify-content: center;
+    text-align: center;
+    font-size: var(--fs-meta);
+    line-height: 1.2;
+  }
+
+  .service-pop {
+    width: min(280px, calc(100vw - 32px));
+  }
+
+  .page {
+    padding: 24px var(--gutter) 56px;
+  }
+
+  .page-head {
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .page-explain {
+    padding-top: 0;
+    white-space: normal;
+  }
+
+  .card-grid,
+  .cat-grid,
+  .known-grid,
+  .tiles-2,
+  .tiles-3 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .steps {
+    flex-direction: column;
+  }
+
+  .step-arrow {
+    transform: rotate(90deg);
+  }
+
+  .learn-row {
+    flex-wrap: wrap;
+    gap: 6px 12px;
+  }
+
+  .learn-meta {
+    flex-basis: 100%;
+  }
+
+  .cat-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cat-controls .filter {
+    width: 100%;
+  }
+
+  .picker {
+    padding: 28px 16px 56px;
+  }
+
+  .picker-item {
+    flex-wrap: wrap;
+    gap: 4px 12px;
+  }
+
+  .picker-item-id {
+    min-width: 0;
+  }
+
+  .picker-item-iogv {
+    margin-left: 0;
+    text-align: left;
+    max-width: none;
+    flex-basis: 100%;
+  }
+
+  .how {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .how-arrow {
+    transform: rotate(90deg);
+  }
+
+  .banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .banner-actions {
+    flex-wrap: wrap;
+  }
+
+  .wizard-card {
+    padding: 20px 16px;
+  }
+
+  .wizard-foot {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .done-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .drawer {
+    width: 100vw;
+  }
+
+  .drawer-body {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .drawer-foot {
+    padding: 14px 16px 18px;
+  }
+
+  .data-actions {
+    flex-wrap: wrap;
+  }
+
+  .data-select {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .data-card {
+    padding: 12px;
+  }
+}
+
+/* --- Поправки по результатам проверки в браузере ----------------------- */
+
+.section > .section-lead {
+  margin-bottom: 12px;
+}
+
+@media (min-width: 721px) {
+  .nav {
+    gap: 24px;
+  }
+
+  .nav-item {
+    white-space: nowrap;
+  }
+
+  .who-position {
+    max-width: 170px;
+  }
+}
